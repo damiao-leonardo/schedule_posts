@@ -1,4 +1,5 @@
 import React from 'react';
+import './components/fontawesome';
 import GlobalStyle from './styles/global';
 import { Wrapper, Container } from './styles/componentes';
 import Header from './components/Header';

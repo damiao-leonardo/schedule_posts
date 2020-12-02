@@ -83,22 +83,20 @@ export const Network = styled.div`
           border-radius: 50%;
           border: 1px solid #9E9E9E;
           box-sizing: border-box;
-          cursor: pointer;
-         
-              img{
+
+              .icon{
                 height:16px;
                 width:16px;
                 margin-top:8px;
                 margin-left:8px;
               }
-        } 
 
-        .insta{
-          background: linear-gradient(187.5deg, #EF2EA2 5.81%, #E0A22B 109.34%);
-        }
-        .linke{
-          background: #2E92EF;
-        }
+              .isDisabled {
+                pointer-events:none;
+                opacity: 0.2;
+                text-decoration: none;
+              }
+        } 
 
         .selected{
           background: #DDDDDD;

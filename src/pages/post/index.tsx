@@ -1,22 +1,30 @@
-import React, { useState, FormEvent, ChangeEvent } from 'react';
-
+import React, { useState, FormEvent, ChangeEvent, useEffect } from 'react';
 import {
     Form, Network, Calendar, DescriptionPost,
     File, ViewPost, ViewPostMobile, CardHeader, ContainerFooter
 } from './style';
-import Insta from '../../assets/insta.svg';
-import Linkedin from '../../assets/linkedin.svg';
-import Youtube from '../../assets/youtube.svg';
-import Pinterest from '../../assets/pinterest.svg';
-import Twiter from '../../assets/twiter.svg';
-import Face from '../../assets/face.svg';
+import { Link,useHistory } from 'react-router-dom';
 import Previewpost from '../../assets/preview_post.svg';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Dropzone from '../../components/upload';
 import Preview from '../../components/preview';
 
+import api from '../../services/api';
+
+
+interface NetWork {
+    id: number;
+    name: string;
+    icon: string;
+    status: string;
+}
+
+
 const Post: React.FC = () => {
 
+
+    const history = useHistory();
+    const [networks, setNetwoorks] = useState<NetWork[]>([]);
     const [selectedFile, setSelectedFile] = useState<File>();
     const [fileURL, setFileURL] = useState('');
     const [selectedDescription, setselectedDescription] = useState<string>('');
@@ -25,6 +33,13 @@ const Post: React.FC = () => {
         date: '',
         time: '',
     });
+
+    useEffect(() => {
+        api.get('social-networks').then(response => {
+            setNetwoorks(response.data);
+        });
+
+    }, []);
 
     function hadleInputChange(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target;
@@ -45,35 +60,23 @@ const Post: React.FC = () => {
         } else {
             setselectedNetwork([...selectedNetwork, id]);
         }
+        console.log(selectedNetwork);
     }
 
     async function handleSubmit(event: FormEvent) {
         event.preventDefault();
-
         const { date, time } = formData;
         const networks = selectedNetwork;
-        const description = selectedDescription;
         const data = {
-            date,
-            time,
-            description,
-            networks,
-            'image': selectedFile
-        };
-
-        // const data = new FormData();
-
-        // data.append('date', date);
-        // data.append('time', time);
-        // data.append('description', selectedDescription);
-
-        console.log(data);
-
-        // data.append('networks', networks.join(','));
-        // if (selectedFile) {
-        //   data.append('image', selectedFile);
-        // }
-
+              "publication_date": "2020-09-08T15:59:23.922Z",
+              "text": selectedDescription,
+              "status_key": "1",
+              "social_network_key": networks,
+              "media": "https://images.unsplash.com/photo-1600025282051-ec0c6bf3137a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
+          
+          };
+        await api.post('schedules', data);
+        history.push('/schedules');
     }
     return (
         <Form>
@@ -84,20 +87,19 @@ const Post: React.FC = () => {
                     </CardHeader>
                     <div className="CardContainer">
                         <ul>
-                            <li
-                                className={selectedNetwork.includes(1) ? 'selected insta' : "insta"}
-                                onClick={() => handleSelectNetwork(1)}>
-                                <img src={Insta} alt="Instagram" />
-                            </li>
-                            <li
-                                className={selectedNetwork.includes(2) ? 'selected linke' : "linke"}
-                                onClick={() => handleSelectNetwork(2)}>
-                                <img src={Linkedin} alt="Linkedin" />
-                            </li>
-                            <li><img src={Youtube} alt="Youtube" /></li>
-                            <li><img src={Pinterest} alt="Pinterest" /></li>
-                            <li><img src={Twiter} alt="Twiter" /></li>
-                            <li><img src={Face} alt="Face" /></li>
+                            {networks.map((item) => (
+                                <li
+                                    key={item.id}
+                                    className={selectedNetwork.includes(item.id) ? 'selected' : ''}
+                                >
+                                    <Link 
+                                       onClick={() => handleSelectNetwork(item.id)}
+                                       className={(item.status === "disabled") ? 'isDisabled' : '' }  
+                                       to="#">
+                                       <FontAwesomeIcon className="icon" color="red" icon={["fab", "facebook-f"]} />
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 </Network>

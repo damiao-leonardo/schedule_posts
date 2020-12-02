@@ -74,7 +74,6 @@ table tbody .icons{
             box-sizing: border-box;
          }
       }
-  
 }
 
 table tbody .media img{
@@ -82,9 +81,14 @@ table tbody .media img{
         width:50px;
 }
 
-table tbody .status span{
-    margin-left:6px;
+table tbody .status .icon{
+   height: 12px;
+   width:12px;
+   border-radius: 50%;
 } 
 
+table tbody .status span{
+    margin-left: 6px;
+}
 
 `;
