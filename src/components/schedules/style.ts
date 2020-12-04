@@ -33,7 +33,7 @@ table tbody .icons{
     display:flex;
     flex-wrap: wrap;
     justify-content:center;
-      .insta{
+      .Instagram{
         height:33px;
         width:33px;
         border-radius:12px;
@@ -54,7 +54,7 @@ table tbody .icons{
          }
       }
 
-      .linke{  
+      .Linkedin{  
 
         height:33px;
         width:33px;

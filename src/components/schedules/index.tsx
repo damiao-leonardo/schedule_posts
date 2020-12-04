@@ -7,45 +7,55 @@ import { format } from 'date-fns';
 
 import api from '../../services/api';
 
-
 interface scheduleList {
     id: number,
     social_network_key: Array<number>,
     media: string,
     text: string,
     publication_date: Date,
-    status: number,
+    status: string,
+    networks: Array<networkList>,
+}
+
+interface networkList {
+    id: number,
+    name: string,
+    icon: string,
+    status:string,
 }
 
 const TableSchedule: React.FC = () => {
 
-    const [schedules, setSchedules] = useState<scheduleList[]>([]);
-    const [color,SetColor] = useState('');
+    const [schedules, setSchedules] = useState<any[]>([]);
+    const [color, SetColor] = useState('');
+    const [network, SetNetwork] = useState<networkList[]>([]);
 
     useEffect(() => {
-        api.get('schedules').then(response => {
-            setSchedules(response.data);
+        api.get('social-networks').then(response => {
+            SetNetwork(response.data);
         });
-    }, []);
 
-     function getStatusColor<String>(id: number) {
-        api.get(`status/${id}`).then(response => {
-            SetColor(response.data.color);
-        });
-        return color;
-    }
+    },[]);
 
-    function getNetwork<Boolean>(networks : Array<number>) {
+     useEffect(() => {
+        const asdf = async () => {
+            const response = await api.get<scheduleList[]>('schedules');
+            const listSchedules = response.data.map(schedule => {
+                const list = schedule.social_network_key.map(network_id => {
+                    return network.find(net => net.id === network_id); 
+                });
+                return {
+                    ...schedule,
+                    networks: list,
+                }
+            });
+            setSchedules(listSchedules);
+        }
+        if(network.length > 0)
+          asdf();
 
-        networks.map((network) => (
-            console.log(network)
-        ));
+    }, [network]);
 
-    }
-
-  
-
-    
 
     return (
         <ScheduleList id="simple-board">
@@ -62,15 +72,13 @@ const TableSchedule: React.FC = () => {
                     {schedules.map((item) => (
                         <tr key={item.id}>
                             <td className="icons">
-
-
-                                <div className="insta">
-                                    <img src={Insta} alt="network" />
-                                </div>
-                                <div className="linke">
-                                    <img src={Linkedin} alt="network" />
-                                </div>
-
+                                  {item.networks.map((net : networkList) => {
+                                    return (
+                                        <div className={net.name}>
+                                            <img src={Insta} alt={net.name} />
+                                        </div>
+                                    )
+                                })}  
                             </td>
                             <td className="media">
                                 <img src={item.media} alt="Mídia" />
