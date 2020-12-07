@@ -94,19 +94,22 @@ const Post: React.FC = () => {
                     </CardHeader>
                     <div className="CardContainer">
                         <ul>
-                            {networks.map((item) => (
-                                <li
-                                    key={item.id}
-                                    className={selectedNetwork.includes(item.id) ? 'selected' : ''}
-                                >
-                                    <Link
-                                        onClick={() => handleSelectNetwork(item.id)}
-                                        className={(item.status === "disabled") ? 'isDisabled' : ''}
-                                        to="#">
-                                        <FontAwesomeIcon className="icon" icon={["fab", "linkedin-in"]} />
-                                    </Link>
-                                </li>
-                            ))}
+                            {
+                                (networks.length > 0) ?
+                                    networks.map((item) => (
+                                        <li
+                                            key={item.id}
+                                            className={selectedNetwork.includes(item.id) ? 'selected' : ''}
+                                        >
+                                            <Link
+                                                onClick={() => handleSelectNetwork(item.id)}
+                                                className={(item.status === "disabled") ? 'isDisabled' : ''}
+                                                to="#">
+                                                <FontAwesomeIcon className="icon" icon={["fab", "linkedin-in"]} />
+                                            </Link>
+                                        </li>
+                                    ))
+                                    : <></>}
                         </ul>
                     </div>
                 </Network>
@@ -133,16 +136,16 @@ const Post: React.FC = () => {
                 </File>
                 <ViewPostMobile>
                     <div>
-                        <Link 
+                        <Link
                             to={{
-                               pathname: "/preview_mobile",
-                               state: { img: "sdbrb" ,damiao: "vamos", description: "top"}
-                              }}
+                                pathname: "/preview_mobile",
+                                state: { img: "sdbrb", damiao: "vamos", description: "top" }
+                            }}
                             className={!verifyExistFileAndNetwork() ? "isDisabled" : ''}
                         >
                             Visualizar post
-                        </Link> 
-                    </div>         
+                        </Link>
+                    </div>
                 </ViewPostMobile>
             </section>
             <section className="PreviewPost">

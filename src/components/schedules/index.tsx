@@ -21,7 +21,7 @@ interface networkList {
     id: number,
     name: string,
     icon: string,
-    status:string,
+    status: string,
 }
 
 const TableSchedule: React.FC = () => {
@@ -35,14 +35,14 @@ const TableSchedule: React.FC = () => {
             SetNetwork(response.data);
         });
 
-    },[]);
+    }, []);
 
-     useEffect(() => {
+    useEffect(() => {
         const asdf = async () => {
             const response = await api.get<scheduleList[]>('schedules');
             const listSchedules = response.data.map(schedule => {
                 const list = schedule.social_network_key.map(network_id => {
-                    return network.find(net => net.id === network_id); 
+                    return network.find(net => net.id === network_id);
                 });
                 return {
                     ...schedule,
@@ -51,8 +51,8 @@ const TableSchedule: React.FC = () => {
             });
             setSchedules(listSchedules);
         }
-        if(network.length > 0)
-          asdf();
+        if (network.length > 0)
+            asdf();
 
     }, [network]);
 
@@ -69,34 +69,36 @@ const TableSchedule: React.FC = () => {
                     <th>Status</th>
                 </thead>
                 <tbody>
-                    {schedules.map((item) => (
-                        <tr key={item.id}>
-                            <td className="icons">
-                                  {item.networks.map((net : networkList) => {
-                                    return (
-                                        <div className={net.name}>
-                                            <img src={Insta} alt={net.name} />
-                                        </div>
-                                    )
-                                })}  
-                            </td>
-                            <td className="media">
-                                <img src={item.media} alt="Mídia" />
-                            </td>
-                            <td>{item.text}</td>
-                            <td>
-                                {
-                                    format(new Date(item.publication_date), 'dd/MM/yyyy') + " às " +
-                                    format(new Date(item.publication_date), 'H:ii')
-                                }
-                            </td>
-                            <td><a href="/">Preview</a></td>
-                            <td className="status">
-                                <FontAwesomeIcon className="icon" color="red" icon={["fas", "coffee"]} />
-                                <span>Agendado</span>
-                            </td>
-                        </tr>
-                    ))}
+                    {
+                        (schedules.length > 0) ?
+                            schedules.map((item) => (
+                                <tr key={item.id}>
+                                    <td className="icons">
+                                        {item.networks.map((net: networkList) => {
+                                            return (
+                                                <div className={net.name}>
+                                                    <img src={Insta} alt={net.name} />
+                                                </div>
+                                            )
+                                        })}
+                                    </td>
+                                    <td className="media">
+                                        <img src={item.media} alt="Mídia" />
+                                    </td>
+                                    <td>{item.text}</td>
+                                    <td>
+                                        {
+                                            format(new Date(item.publication_date), 'dd/MM/yyyy') + " às " +
+                                            format(new Date(item.publication_date), 'H:ii')
+                                        }
+                                    </td>
+                                    <td><a href="/">Preview</a></td>
+                                    <td className="status">
+                                        <FontAwesomeIcon className="icon" color="red" icon={["fas", "coffee"]} />
+                                        <span>Agendado</span>
+                                    </td>
+                                </tr>
+                            )) : <></>}
                 </tbody>
             </table>
         </ScheduleList>
