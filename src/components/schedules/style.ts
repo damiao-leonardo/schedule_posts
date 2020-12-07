@@ -3,10 +3,13 @@ import styled from 'styled-components';
 export const ScheduleList = styled.div`
 
 table{
-    margin-left: 40px;
     margin-right: 46px;
     border: 1px solid #BDBDBD;
     Width: 1354px;
+
+    @media (min-width: 769px) and (max-width: 992px) {
+       width: 700px;
+    }
 }
 
 table thead th{

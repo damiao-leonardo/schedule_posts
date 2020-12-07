@@ -23,12 +23,20 @@ export const Form = styled.form`
     background: #FFFFFF;
   }
 
+
+  .isDisabled {
+    pointer-events:none;
+    opacity: 0.2;
+    text-decoration: none;
+  }
+
   @media (max-width: 768px){
     .FormPost{
       display:block;;
       width:100%;
     }
     .Footer{  
+      max-width: 390px;
       margin-top:10px;
     }
   }
@@ -69,7 +77,6 @@ export const Network = styled.div`
     margin-top:17px;
   }
 
-  
  ul{
       display:flex;
       flex-wrap: wrap;
@@ -89,13 +96,7 @@ export const Network = styled.div`
                 width:16px;
                 margin-top:8px;
                 margin-left:8px;
-              }
-
-              .isDisabled {
-                pointer-events:none;
-                opacity: 0.2;
-                text-decoration: none;
-              }
+              }        
         } 
 
         .selected{
@@ -152,7 +153,6 @@ export const DescriptionPost = styled.div`
   border: 1px solid #E0E0E0;
   border-radius:4px;
 
-
     textarea{
       width:640px;
       height:146px;
@@ -176,19 +176,30 @@ export const DescriptionPost = styled.div`
         line-height: 21px;
         color: #4F4F4F;
        }
-
-
-
     }
-
-    
-
-
 
   @media (max-width: 768px) {
     width:315px;
     height:172px;
     margin-top:15px;
+
+    textarea{
+      height: 101px;
+      width:276px;
+    }
+  }
+
+  @media all and (min-width: 700px) and (max-width: 1024px){
+    width:315px;
+    textarea{
+      width:276px;
+    }
+  }
+  @media all and (min-width: 1025px) and (max-width: 1399px){
+    width:450px;
+    textarea{
+      width:410px;
+    }
   }
 
 `;
@@ -203,11 +214,13 @@ export const File = styled.div`
   border: 1px solid #E0E0E0;
   border-radius:4px;
 
-  @media (max-width: 768px) {
+  @media (max-width:992px) {
     width:315px;
     height:147px;
     margin-top:15px;
   }
+
+
  
 `;
 
@@ -222,7 +235,11 @@ export const ViewPost = styled.div`
   border-radius:4px;
 
   @media (max-width: 768px) {
-      display:none;
+      display:none;    
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    display:none; 
   }
 
   .TextWait{
@@ -257,32 +274,38 @@ export const ViewPost = styled.div`
 `;
 
 export const ViewPostMobile = styled.div`
-  
-   button{
+
+   div{
     width:315px;
-    height: 35px;
-    border: 1px solid #E0812C;
+    height: 35px; 
     box-sizing: border-box;
     border-radius: 4px;
     margin-left: 40px;
     margin-top: 10px;
     background: #F2994A;
-    font-family: Poppins;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 16px;
-    line-height: 24px;
-    text-align: center;
-    color: #FFFFFF;
-  }
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+      a{
+        padding:5px 95px 5px 95px;
+        text-decoration: none;
+        font-family: Poppins;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        text-align: center;
+        color: #FFFFFF; 
+      }
+   }
 
 
   @media (min-width: 768px) {
-    button{
+    div{
       display:none;
-    }  
+    }    
   }
-
 `;
 
 export const ContainerFooter = styled.div`
@@ -372,12 +395,7 @@ export const ContainerFooter = styled.div`
 
   }
 
-
-  
- 
   @media (max-width: 768px){
-
-    margin-bottom:96px;
 
     .cancel{
       width: 62px;
@@ -449,7 +467,6 @@ export const ContainerFooter = styled.div`
     }
   }
 `;
-
 
 
 

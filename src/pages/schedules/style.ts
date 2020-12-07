@@ -20,4 +20,16 @@ export const Title = styled.div`
 
 export const Container = styled.div` 
  width:1440px;
+ margin-left:40px;
+
+ @media (max-width: 768px) {
+    width: 315px;
+    overflow-x: scroll;
+  }
+
+  @media (min-width: 769px) and (max-width: 992px) {
+    width: 700px;
+    overflow-x: scroll;
+  }
+
 `;

@@ -6,15 +6,16 @@ import Header from './components/Header';
 import { BrowserRouter } from 'react-router-dom';
 import Routes from './routes/routes';
 
+console.log(window.innerWidth);
 const App = () => (
   <>
     <GlobalStyle />
     <Wrapper>
       <Container>
         <Header />
-          <BrowserRouter>
-             <Routes />
-          </BrowserRouter>
+        <BrowserRouter>
+          <Routes />
+        </BrowserRouter>
       </Container>
     </Wrapper>
   </>

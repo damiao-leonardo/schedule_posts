@@ -8,12 +8,21 @@ export const Card = styled.div`
  border: 1px solid #BDBDBD;
  box-sizing: border-box;
  border-radius: 4px;
+
+ @media (max-width: 768px) {
+    width: 315px;
+    margin-left:0px;
+  }
 `;
 
 export const Header = styled.div`
   width:368px;
   height:82px; 
   display:flex;
+
+  @media (max-width: 768px) {
+    width: 315px;
+  }
 
   .logo{
     height:40px;
@@ -49,6 +58,10 @@ export const Container = styled.div`
  width:365px;
  height:387px;
  margin:auto;
+
+ @media (max-width: 768px) {
+    width: 315px;
+  }
  
  .description{
      height: 50px;
@@ -74,7 +87,10 @@ export const Container = styled.div`
 export const Footer = styled.div`
  width:368px;
  height:64px;
- /* margin-top:50px;  */
+
+ @media (max-width: 768px) {
+    width: 315px;
+  }
 
  .card_footer{
 

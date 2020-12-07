@@ -3,13 +3,14 @@ import {
     Form, Network, Calendar, DescriptionPost,
     File, ViewPost, ViewPostMobile, CardHeader, ContainerFooter
 } from './style';
-import { Link,useHistory } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Previewpost from '../../assets/preview_post.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Dropzone from '../../components/upload';
 import Preview from '../../components/preview';
 
 import api from '../../services/api';
+
 
 
 interface NetWork {
@@ -29,6 +30,7 @@ const Post: React.FC = () => {
     const [fileURL, setFileURL] = useState('');
     const [selectedDescription, setselectedDescription] = useState<string>('');
     const [selectedNetwork, setselectedNetwork] = useState<number[]>([]);
+    const [isModalVisible, SetModalVisible] = useState(true);
     const [formData, setFormData] = useState({
         date: '',
         time: '',
@@ -40,6 +42,10 @@ const Post: React.FC = () => {
         });
 
     }, []);
+
+    function verifyExistFileAndNetwork() {
+        return fileURL && selectedNetwork.length > 0 ? true : false;
+    }
 
     function hadleInputChange(event: ChangeEvent<HTMLInputElement>) {
         const { name, value } = event.target;
@@ -68,16 +74,17 @@ const Post: React.FC = () => {
         const { date, time } = formData;
         const networks = selectedNetwork;
         const data = {
-              "publication_date": "2020-09-08T15:59:23.922Z",
-              "text": selectedDescription,
-              "status_key": "1",
-              "social_network_key": networks,
-              "media": "https://images.unsplash.com/photo-1600025282051-ec0c6bf3137a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
-          
-          };
-        await api.post('schedules', data);
+            "publication_date": "2020-09-08T15:59:23.922Z",
+            "text": selectedDescription,
+            "status_key": "1",
+            "social_network_key": networks,
+            "media": "https://images.unsplash.com/photo-1600025282051-ec0c6bf3137a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
+
+        };
+        // await api.post('schedules', data);
         history.push('/schedules');
     }
+
     return (
         <Form>
             <section className="FormPost">
@@ -92,11 +99,11 @@ const Post: React.FC = () => {
                                     key={item.id}
                                     className={selectedNetwork.includes(item.id) ? 'selected' : ''}
                                 >
-                                    <Link 
-                                       onClick={() => handleSelectNetwork(item.id)}
-                                       className={(item.status === "disabled") ? 'isDisabled' : '' }  
-                                       to="#">
-                                       <FontAwesomeIcon className="icon" color="red" icon={["fab", "facebook-f"]} />
+                                    <Link
+                                        onClick={() => handleSelectNetwork(item.id)}
+                                        className={(item.status === "disabled") ? 'isDisabled' : ''}
+                                        to="#">
+                                        <FontAwesomeIcon className="icon" icon={["fab", "linkedin-in"]} />
                                     </Link>
                                 </li>
                             ))}
@@ -125,7 +132,17 @@ const Post: React.FC = () => {
                     </CardHeader>
                 </File>
                 <ViewPostMobile>
-                    <button>Visualizar post</button>
+                    <div>
+                        <Link 
+                            to={{
+                               pathname: "/preview_mobile",
+                               state: { img: "sdbrb" ,damiao: "vamos", description: "top"}
+                              }}
+                            className={!verifyExistFileAndNetwork() ? "isDisabled" : ''}
+                        >
+                            Visualizar post
+                        </Link> 
+                    </div>         
                 </ViewPostMobile>
             </section>
             <section className="PreviewPost">
@@ -133,7 +150,7 @@ const Post: React.FC = () => {
                     <CardHeader>
                         <div className="title"><span>Visualização do post</span></div>
                     </CardHeader>
-                    {fileURL ? (
+                    {verifyExistFileAndNetwork() ? (
                         <Preview
                             img={fileURL}
                             description={selectedDescription}
@@ -154,14 +171,19 @@ const Post: React.FC = () => {
             </section>
             <section className="Footer">
                 <ContainerFooter>
-                    <div className="cancel"><a href="/">Cancelar</a></div>
+                    <div className="cancel"><Link to="/">Cancelar</Link></div>
                     <div className="save">
-                        <a href="/">
+                        <Link to="/">
                             <span className="mobile">Rascunho</span>
                             <span className="desktop">Salvar rascunho</span>
-                        </a>
+                        </Link>
                     </div>
-                    <div className="schedule"><a onClick={handleSubmit} href="/">Agendar </a></div>
+                    <div className="schedule">
+                        <Link
+                            onClick={handleSubmit}
+                            to="/"
+                            className={!verifyExistFileAndNetwork() ? "isDisabled" : ''}
+                        >Agendar </Link></div>
                 </ContainerFooter>
             </section>
         </Form>

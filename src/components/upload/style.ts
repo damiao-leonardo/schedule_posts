@@ -53,4 +53,34 @@ export const Upload = styled.div`
     }
   }
 
+  @media (max-width: 768px) {
+        width:274px;
+        height:83px;
+
+        img{
+          display:none;
+        }
+        p{
+          display:none;
+        }
+  }
+
+  @media all and (min-width: 700px) and (max-width: 1024px){
+        width:274px;
+        height:83px;
+        img{
+          display:none;
+        }
+        p{
+          display:none;
+        }  
+  }
+  @media all and (min-width: 1025px) and (max-width: 1399px){
+        width:450px;
+        p{
+          width: 400px;
+          font-size: 13px;
+        }
+  }
+
 `;
