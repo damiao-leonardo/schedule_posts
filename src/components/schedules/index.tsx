@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ScheduleList } from './style';
-import Insta from '../../assets/insta.svg';
-import Linkedin from '../../assets/linkedin.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { findIconDefinition, IconLookup } from '@fortawesome/fontawesome-svg-core';
 import { format } from 'date-fns';
 
 import api from '../../services/api';
@@ -13,7 +12,7 @@ interface scheduleList {
     media: string,
     text: string,
     publication_date: Date,
-    status: string,
+    status_key: {},
     networks: Array<networkList>,
 }
 
@@ -24,38 +23,49 @@ interface networkList {
     status: string,
 }
 
+interface statusList {
+    id: number,
+    name: string,
+    color: string,
+}
+
 const TableSchedule: React.FC = () => {
 
     const [schedules, setSchedules] = useState<any[]>([]);
-    const [color, SetColor] = useState('');
+    const [status, SetStatus] = useState<statusList[]>([]);
     const [network, SetNetwork] = useState<networkList[]>([]);
 
     useEffect(() => {
+
+        api.get('status').then(response => {
+            SetStatus(response.data);
+        });
+
         api.get('social-networks').then(response => {
             SetNetwork(response.data);
         });
-
     }, []);
 
     useEffect(() => {
-        const asdf = async () => {
+        const getSchedules = async () => {
             const response = await api.get<scheduleList[]>('schedules');
             const listSchedules = response.data.map(schedule => {
-                const list = schedule.social_network_key.map(network_id => {
+                const listNetworks = schedule.social_network_key.map(network_id => {
                     return network.find(net => net.id === network_id);
                 });
+                const listStatus = status.find(item => item.id === schedule.status_key)
                 return {
                     ...schedule,
-                    networks: list,
+                    networks: listNetworks,
+                    status: listStatus
                 }
             });
             setSchedules(listSchedules);
         }
-        if (network.length > 0)
-            asdf();
+        if (network.length > 0 && status.length > 0)
+            getSchedules();
 
-    }, [network]);
-
+    }, [network, status]);
 
     return (
         <ScheduleList id="simple-board">
@@ -69,36 +79,35 @@ const TableSchedule: React.FC = () => {
                     <th>Status</th>
                 </thead>
                 <tbody>
-                    {
-                        (schedules.length > 0) ?
-                            schedules.map((item) => (
-                                <tr key={item.id}>
-                                    <td className="icons">
-                                        {item.networks.map((net: networkList) => {
-                                            return (
-                                                <div className={net.name}>
-                                                    <img src={Insta} alt={net.name} />
-                                                </div>
-                                            )
-                                        })}
-                                    </td>
-                                    <td className="media">
-                                        <img src={item.media} alt="Mídia" />
-                                    </td>
-                                    <td>{item.text}</td>
-                                    <td>
-                                        {
-                                            format(new Date(item.publication_date), 'dd/MM/yyyy') + " às " +
-                                            format(new Date(item.publication_date), 'H:ii')
-                                        }
-                                    </td>
-                                    <td><a href="/">Preview</a></td>
-                                    <td className="status">
-                                        <FontAwesomeIcon className="icon" color="red" icon={["fas", "coffee"]} />
-                                        <span>Agendado</span>
-                                    </td>
-                                </tr>
-                            )) : <></>}
+                    {schedules && (schedules.length > 0) && schedules.map((item) => (
+                        <tr key={item.id}>
+                            <td className="icons">
+                                {item.networks.map((net: networkList) => {
+                                    console.log(net);
+                                    return (
+                                        <div key={net.id} className={net.name}>
+                                            <FontAwesomeIcon color="white" className="icon" icon={findIconDefinition({ prefix: 'fab', iconName: net.icon } as IconLookup)} />
+                                        </div>
+                                    )
+                                })}
+                            </td>
+                            <td className="media">
+                                <img src={item.media} alt="Mídia" />
+                            </td>
+                            <td>{item.text}</td>
+                            <td>
+                                {
+                                    format(new Date(item.publication_date), 'dd/MM/yyyy') + " às " +
+                                    format(new Date(item.publication_date), 'H:ii')
+                                }
+                            </td>
+                            <td><a href="/">Preview</a></td>
+                            <td className="status">
+                                <FontAwesomeIcon className="icon" color={item.status.color} icon={["fas", "circle"]} />
+                                <span>{item.status.name}</span>
+                            </td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </ScheduleList>

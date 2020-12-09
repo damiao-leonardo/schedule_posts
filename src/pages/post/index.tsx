@@ -6,12 +6,12 @@ import {
 import { Link, useHistory } from 'react-router-dom';
 import Previewpost from '../../assets/preview_post.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { findIconDefinition, IconLookup } from '@fortawesome/fontawesome-svg-core';
 import Dropzone from '../../components/upload';
 import Preview from '../../components/preview';
 
+
 import api from '../../services/api';
-
-
 
 interface NetWork {
     id: number;
@@ -20,9 +20,7 @@ interface NetWork {
     status: string;
 }
 
-
 const Post: React.FC = () => {
-
 
     const history = useHistory();
     const [networks, setNetwoorks] = useState<NetWork[]>([]);
@@ -30,7 +28,7 @@ const Post: React.FC = () => {
     const [fileURL, setFileURL] = useState('');
     const [selectedDescription, setselectedDescription] = useState<string>('');
     const [selectedNetwork, setselectedNetwork] = useState<number[]>([]);
-    const [isModalVisible, SetModalVisible] = useState(true);
+    const [isModalVisible, SetModalVisible] = useState(false);
     const [formData, setFormData] = useState({
         date: '',
         time: '',
@@ -40,7 +38,6 @@ const Post: React.FC = () => {
         api.get('social-networks').then(response => {
             setNetwoorks(response.data);
         });
-
     }, []);
 
     function verifyExistFileAndNetwork() {
@@ -73,15 +70,17 @@ const Post: React.FC = () => {
         event.preventDefault();
         const { date, time } = formData;
         const networks = selectedNetwork;
+        const formatDate = new Date(date.concat(", ").concat(time));
+
         const data = {
-            "publication_date": "2020-09-08T15:59:23.922Z",
+            "publication_date": formatDate.toISOString(),
             "text": selectedDescription,
-            "status_key": "1",
+            "status_key": 1,
             "social_network_key": networks,
             "media": "https://images.unsplash.com/photo-1600025282051-ec0c6bf3137a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
-
         };
-        // await api.post('schedules', data);
+        await api.post('schedules', data);
+        SetModalVisible(true);
         history.push('/schedules');
     }
 
@@ -95,21 +94,21 @@ const Post: React.FC = () => {
                     <div className="CardContainer">
                         <ul>
                             {
-                                (networks.length > 0) ?
-                                    networks.map((item) => (
-                                        <li
-                                            key={item.id}
-                                            className={selectedNetwork.includes(item.id) ? 'selected' : ''}
-                                        >
-                                            <Link
-                                                onClick={() => handleSelectNetwork(item.id)}
-                                                className={(item.status === "disabled") ? 'isDisabled' : ''}
-                                                to="#">
-                                                <FontAwesomeIcon className="icon" icon={["fab", "linkedin-in"]} />
-                                            </Link>
-                                        </li>
-                                    ))
-                                    : <></>}
+                                networks && (networks.length > 0) &&
+                                networks.map((item) => (
+                                    <li
+                                        key={item.id}
+                                        className={selectedNetwork.includes(item.id) ? 'selected' : ''}
+                                    >
+                                        <Link
+                                            onClick={() => handleSelectNetwork(item.id)}
+                                            className={(item.status === "disabled") ? 'isDisabled' : ''}
+                                            to="#">
+                                            <FontAwesomeIcon className="icon" icon={findIconDefinition({ prefix: 'fab', iconName: item.icon } as IconLookup)} />
+                                        </Link>
+                                    </li>
+                                ))
+                            }
                         </ul>
                     </div>
                 </Network>
@@ -139,7 +138,7 @@ const Post: React.FC = () => {
                         <Link
                             to={{
                                 pathname: "/preview_mobile",
-                                state: { img: "sdbrb", damiao: "vamos", description: "top" }
+
                             }}
                             className={!verifyExistFileAndNetwork() ? "isDisabled" : ''}
                         >

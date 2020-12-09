@@ -1,16 +1,17 @@
 import React from 'react';
-import { Title, Container } from './style';
+import { Header, Container } from './style';
+import { Link } from 'react-router-dom';
 import TableSchedule from '../../components/schedules';
 
 const Schedule: React.FC = () => {
-
     return (
         <section>
-            <Title>
+            <Header>
                 <span>Listagem de Agendamento</span>
-            </Title>
+                <div><Link to="/post">Novo Agendamento</Link></div>
+            </Header>
             <Container>
-               <TableSchedule /> 
+                <TableSchedule />
             </Container>
         </section>
     );

@@ -47,7 +47,7 @@ table tbody .icons{
         border: 1px solid #D60F86;
         box-sizing: border-box;
 
-        img{
+        .icon{
              height:16px;
              width:16px;
              margin-top:8px;
@@ -68,7 +68,7 @@ table tbody .icons{
         margin-left:15px;
         margin-top:18px;
 
-         img{
+         .icon{
             height:16px;
             width:16px;
             margin-top:8px;

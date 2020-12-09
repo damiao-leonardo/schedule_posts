@@ -8,6 +8,7 @@ export const Card = styled.div`
  border: 1px solid #BDBDBD;
  box-sizing: border-box;
  border-radius: 4px;
+ background-color:white;
 
  @media (max-width: 768px) {
     width: 315px;
