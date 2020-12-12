@@ -36,11 +36,9 @@ const Post: React.FC = () => {
 
     useEffect(() => {
 
-        const getNetworks = async () => {
-            api.get('social-networks').then(response => {
-                setNetwoorks(response.data);
-            });
-        }
+        api.get('social-networks').then(response => {
+            setNetwoorks(response.data);
+        });
         const object = JSON.parse(JSON.stringify(localStorage.getItem('post')));
         if (object && object.length > 0) {
             const post = JSON.parse(object);
@@ -50,8 +48,6 @@ const Post: React.FC = () => {
             setselectedDescription(post.description);
             localStorage.removeItem('post');
         }
-
-        getNetworks();
     }, []);
 
     function verifyExistFileAndNetwork() {
@@ -122,9 +118,9 @@ const Post: React.FC = () => {
                             <ul>
                                 {
                                     networks && (networks.length > 0) &&
-                                    networks.map(item => {
+                                    networks.map((item, index) => (
                                         <li
-                                            key={item.id}
+                                            key={index}
                                             className={selectedNetwork.includes(item.id) ? 'selected' : ''}
                                         >
                                             <Link
@@ -134,7 +130,8 @@ const Post: React.FC = () => {
                                                 <FontAwesomeIcon className="icon" color="black" icon={findIconDefinition({ prefix: 'fab', iconName: item.icon } as IconLookup)} />
                                             </Link>
                                         </li>
-                                    })}
+                                    ))
+                                }
                             </ul>
                         </div>
                     </Network>
