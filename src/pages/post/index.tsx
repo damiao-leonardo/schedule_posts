@@ -11,8 +11,6 @@ import Dropzone from '../../components/upload';
 import Preview from '../../components/preview';
 import ModalComponent from '../../components/modal/sucess';
 
-
-
 import api from '../../services/api';
 
 interface NetWork {
@@ -37,9 +35,12 @@ const Post: React.FC = () => {
     });
 
     useEffect(() => {
-        api.get('social-networks').then(response => {
-            setNetwoorks(response.data);
-        });
+
+        const getNetworks = async () => {
+            api.get('social-networks').then(response => {
+                setNetwoorks(response.data);
+            });
+        }
         const object = JSON.parse(JSON.stringify(localStorage.getItem('post')));
         if (object && object.length > 0) {
             const post = JSON.parse(object);
@@ -49,6 +50,8 @@ const Post: React.FC = () => {
             setselectedDescription(post.description);
             localStorage.removeItem('post');
         }
+
+        getNetworks();
     }, []);
 
     function verifyExistFileAndNetwork() {
@@ -104,6 +107,8 @@ const Post: React.FC = () => {
         await api.post('schedules', data);
         SetModalVisible(true);
     }
+
+    console.log(networks);
 
     return (
         <>
