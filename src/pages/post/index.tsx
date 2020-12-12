@@ -122,7 +122,7 @@ const Post: React.FC = () => {
                             <ul>
                                 {
                                     networks && (networks.length > 0) &&
-                                    networks.map((item) => (
+                                    networks.map(item => {
                                         <li
                                             key={item.id}
                                             className={selectedNetwork.includes(item.id) ? 'selected' : ''}
@@ -134,8 +134,7 @@ const Post: React.FC = () => {
                                                 <FontAwesomeIcon className="icon" color="black" icon={findIconDefinition({ prefix: 'fab', iconName: item.icon } as IconLookup)} />
                                             </Link>
                                         </li>
-                                    ))
-                                }
+                                    })}
                             </ul>
                         </div>
                     </Network>
