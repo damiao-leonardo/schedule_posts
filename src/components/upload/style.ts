@@ -17,7 +17,7 @@ export const Upload = styled.div`
   img {
    height:30px;
    width:45px;
-   margin-top: 22px;
+   margin-top: 12px;
   }
 
   p{

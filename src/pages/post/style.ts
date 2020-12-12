@@ -117,6 +117,7 @@ export const Calendar = styled.div`
   margin-left:40px;
   margin-top: 50px;
 
+
   @media (max-width: 768px) {
     margin-top:15px;
   }
@@ -126,18 +127,21 @@ export const Calendar = styled.div`
     display:flex;
     flex-wrap: wrap;
     justify-content:center;
-    margin-top: 12px;
+    margin-top: 15px;
 
     .date{
       height: 42px;
-      width:124px;
-      border: 1px solid #949494;
+      width:140px;
+      border:1px solid #ccc;
+      text-align:center;
     }
 
     .time{
       height: 42px;
-      width:124px;
-      border: 1px solid #949494;
+      width:80px;
+      margin-left:15px;
+      border:1px solid #ccc;
+      text-align:center;
     }
   }
  
@@ -275,34 +279,21 @@ export const ViewPost = styled.div`
 
 export const ViewPostMobile = styled.div`
 
-   div{
+   button{
     width:315px;
     height: 35px; 
-    box-sizing: border-box;
     border-radius: 4px;
     margin-left: 40px;
     margin-top: 10px;
     background: #F2994A;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-      a{
-        padding:5px 95px 5px 95px;
-        text-decoration: none;
-        font-family: Poppins;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 24px;
-        text-align: center;
-        color: #FFFFFF; 
-      }
+    border: 1px solid #E0812C;
+    box-sizing: border-box;
+    border-radius: 4px;
+    color:white;
    }
 
-
   @media (min-width: 768px) {
-    div{
+    button{
       display:none;
     }    
   }
@@ -467,7 +458,6 @@ export const ContainerFooter = styled.div`
     }
   }
 `;
-
 
 
 

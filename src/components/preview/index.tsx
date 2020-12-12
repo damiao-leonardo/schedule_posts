@@ -9,19 +9,23 @@ interface Props {
   description: string,
   networks: Array<number>,
   img: string,
+  date: string,
 }
 
-const Preview: React.FC<Props> = ({ networks, description, img }) => {
+const Preview: React.FC<Props> = ({ networks, description, img, date }) => {
 
   const listPosts = networks.map((item) =>
     <>
-      {
-        (item === 1) ? (
-          <Instagram img={img} description={description} />
-        ) : (
-            <Linkedin img={img} description={description} />
+      {(() => {
+        switch (item) {
+          case 1: return (
+            <Instagram img={img} description={description} />
           )
-      }
+          case 2: return (
+            <Linkedin img={img} description={description} date={date} />
+          )
+        }
+      })()}
     </>
   );
   return (
