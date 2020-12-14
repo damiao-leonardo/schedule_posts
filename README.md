@@ -9,9 +9,9 @@
 
 ## Caso seja a primeira vez, é necessario instalar as dependencias da aplicação para que o projeto consiga rodar de forma correto, então tenha ciencia de que sua maquina possua:
 
-YARN 1.22.5 \
-NODE JS 12.20.0 \
-NPM  6.14.8 
+Yarn 1.22.5 \
+Node Js 12.20.0 \
+npm  6.14.8 
 
 ## Caso não tenha essas ferramentas instaladas, segue os links abaixo:
 
@@ -53,14 +53,14 @@ Um detalhe muito importante foi na imagem do Post que foi deixada de forma estat
  
  Encontrei algumas dificuldades relacionadas as iterações dos objetos sendo consumidos do arquivo DB.json, primeiramente eu estruturei a aplicação toda estática , após finalizar comecei a modifica-la para buscar os dados de forma dinâmica e atribuir nos locais de destino, neste momento eu tive muitas duvidas, tais qual:
  
- Sintaxe da linguagem; /
+ Sintaxe da linguagem; \
  substituição das variaveis estaticas por uma dinâmica nos icones; 
  
   ## Melhorias
   
-  Como melhoria futuras eu adicionaria as seguintes funcionalidades;/
+  Como melhoria futuras eu adicionaria as seguintes funcionalidades;\
   
-  Poder agendar mais de um imagem;/
+  Poder agendar mais de um imagem;\
   Poder agendar outros tipos de midias;
   
   
