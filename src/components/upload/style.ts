@@ -75,8 +75,8 @@ export const Upload = styled.div`
           display:none;
         }  
   }
-  @media all and (min-width: 1025px) and (max-width: 1399px){
-        width:450px;
+  @media all and (min-width: 1025px) and (max-width: 1366px){
+        width:590px;
         p{
           width: 400px;
           font-size: 13px;

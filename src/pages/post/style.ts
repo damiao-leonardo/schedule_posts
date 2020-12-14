@@ -77,6 +77,13 @@ export const Network = styled.div`
     margin-top:17px;
   }
 
+  @media all and (min-width: 700px) and (max-width: 1024px){
+    width:315px;
+  }
+  @media all and (min-width: 1025px) and (max-width: 1399px){
+    width:290px;
+  }
+
  ul{
       display:flex;
       flex-wrap: wrap;
@@ -120,6 +127,13 @@ export const Calendar = styled.div`
 
   @media (max-width: 768px) {
     margin-top:15px;
+  }
+
+  @media all and (min-width: 700px) and (max-width: 1024px){
+    width:315px;
+  }
+  @media all and (min-width: 1025px) and (max-width: 1399px){
+    width:290px;
   }
 
   .CardContainer{
@@ -168,8 +182,6 @@ export const DescriptionPost = styled.div`
       resize: none;
       font-family: Poppins;
 
-
-      
       ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
         color: black;
         padding-top:11px;
@@ -199,10 +211,18 @@ export const DescriptionPost = styled.div`
       width:276px;
     }
   }
-  @media all and (min-width: 1025px) and (max-width: 1399px){
-    width:450px;
-    textarea{
+  
+  @media all and (min-width: 1025px) and (max-width: 1136px){
+      width:450px;
+      textarea{
       width:410px;
+    }
+  }
+
+  @media all and (min-width: 1136px) and (max-width: 1366px){
+    width:620px;
+    textarea{
+      width:590px;
     }
   }
 
@@ -224,6 +244,11 @@ export const File = styled.div`
     margin-top:15px;
   }
 
+  @media all and (min-width: 993px) and (max-width: 1399px){
+    width:620px;
+  }
+
+
 
  
 `;
@@ -233,7 +258,7 @@ export const ViewPost = styled.div`
   height: 643px;
   width:649px;
   background: #FFFFFF;
-  margin-left: 40px;
+  margin-left: 20px;
   margin-top: 50px;
   border: 1px solid #E0E0E0;
   border-radius:4px;
@@ -242,8 +267,12 @@ export const ViewPost = styled.div`
       display:none;    
   }
 
-  @media (min-width: 769px) and (max-width: 992px) {
+  @media (min-width: 700px) and (max-width: 1024px) {
     display:none; 
+  }
+
+  @media all and (min-width: 1025px) and (max-width: 1399px){
+    width:620px;
   }
 
   .TextWait{

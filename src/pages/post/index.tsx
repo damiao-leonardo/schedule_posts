@@ -104,8 +104,6 @@ const Post: React.FC = () => {
         SetModalVisible(true);
     }
 
-    console.log(networks);
-
     return (
         <>
             <Form>
