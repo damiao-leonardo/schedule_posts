@@ -48,7 +48,7 @@ export const Header = styled.div`
 `;
 
 export const Container = styled.div` 
- width:1440px;
+ width:1326px;
  margin-left:40px;
 
  @media (max-width: 768px) {
@@ -59,5 +59,9 @@ export const Container = styled.div`
   @media (min-width: 769px) and (max-width: 992px) {
     width: 700px;
     overflow-x: scroll;
+  }
+
+  @media (min-width: 1367px) {
+    width:1440px;
   }
 `;

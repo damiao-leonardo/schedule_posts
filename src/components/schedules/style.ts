@@ -5,11 +5,15 @@ export const ScheduleList = styled.div`
 table{
     margin-right: 46px;
     border: 1px solid #BDBDBD;
-    Width: 1354px;
+    width: 1254px;
 
     @media (min-width: 769px) and (max-width: 992px) {
        width: 700px;
     }
+
+    @media (min-width: 1367px) {
+        width: 1354px;
+  }
 }
 
 table thead th{
