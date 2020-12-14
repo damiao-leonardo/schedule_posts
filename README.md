@@ -9,14 +9,14 @@
 
 ## Caso seja a primeira vez, é necessario instalar as dependencias da aplicação para que o projeto consiga rodar de forma correto, então tenha ciencia de que sua maquina possua:
 
-YARN na versão 1.22.5 
-NODE na versão 12.20.0
-NPM na versão 6.14.8
+YARN 1.22.5 \
+NODE JS 12.20.0 \
+NPM  6.14.8 \
 
 ## Caso não tenha essas ferramentas instaladas, segue os links abaixo:
 
-Node https://github.com/nodesource/distributions/blob/master/README.md
-Yarn https://classic.yarnpkg.com/en/docs/install/#debian-stable
+Node https://github.com/nodesource/distributions/blob/master/README.md \
+Yarn https://classic.yarnpkg.com/en/docs/install/#debian-stable \
 
 ## Ao instalar as ferramentas, rode:
 
