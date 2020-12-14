@@ -7,13 +7,13 @@
   
 ## Dentro da pasta do projeto rode o comando: 
 
-## Caso seja a primeira vez, é necessario instalar as dependencias da aplicação para que o projeto consiga rodar de forma correto, então tenha ciencia de que sua maquina possua:
+Caso seja a primeira vez, é necessario instalar as dependencias da aplicação para que o projeto consiga rodar de forma correto, então tenha ciencia de que sua maquina possua:
 
 Yarn 1.22.5 \
 Node Js 12.20.0 \
 npm  6.14.8 
 
-## Caso não tenha essas ferramentas instaladas, segue os links abaixo:
+Caso não tenha essas ferramentas instaladas, segue os links abaixo:
 
 Node https://github.com/nodesource/distributions/blob/master/README.md \
 Yarn https://classic.yarnpkg.com/en/docs/install/#debian-stable 
@@ -58,7 +58,7 @@ Um detalhe muito importante foi na imagem do Post que foi deixada de forma estat
  
   ## Melhorias
   
-  Como melhoria futuras eu adicionaria as seguintes funcionalidades;\
+  Como melhoria futuras eu adicionaria as seguintes funcionalidades;
   
   Poder agendar mais de um imagem;\
   Poder agendar outros tipos de midias;
