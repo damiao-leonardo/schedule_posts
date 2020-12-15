@@ -2,7 +2,7 @@
  
  O projeto foi construido a partir de um conjunto de ferramentas e funcionalidades pré-configuradas Create React App, economizando dessa forma muito tempo para configura-lo.
  
-A aplicação foi hospedada em um servidor Heroku, a estrutura ficou definida em 2 aplicações, uma sendo o Front end e outra funcionando como o backend, porem contendo apenas um arquivo de DB. Ao iniciar a aplicação certifique-se de esperar um tempo de pelo menos 10 segundos, coniderando ser o tempo de START da aplicação com o DB para que todos os dados seja consumidos.
+A aplicação foi hospedada em um servidor Heroku, a estrutura ficou definida em 2 aplicações, uma sendo o Front-End e outra funcionando como o Back-End, porem contendo apenas um arquivo de DB. Ao iniciar a aplicação certifique-se de esperar um tempo de pelo menos 10 segundos, coniderando ser o tempo de START da aplicação com o DB para que todos os dados seja consumidos.
 
 ## Scripts Disponiveis 
   
