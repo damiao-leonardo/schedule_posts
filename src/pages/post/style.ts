@@ -89,7 +89,7 @@ export const Network = styled.div`
       flex-wrap: wrap;
       justify-content:center;
         li{
-          margin-left:15px;
+          margin-left:12px;
           margin-top: 22px;
           margin-bottom: 22px;
           height:33px;

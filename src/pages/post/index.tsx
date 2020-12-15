@@ -35,7 +35,6 @@ const Post: React.FC = () => {
     });
 
     useEffect(() => {
-
         api.get('social-networks').then(response => {
             setNetwoorks(response.data);
         });

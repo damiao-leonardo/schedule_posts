@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Modal } from './style';
 import Emotion from '../../../assets/emotion_modal.svg';
 
